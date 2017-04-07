@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "bstree.h"
 
 struct bstree *bstree_create(char *key, int value) {
