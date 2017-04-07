@@ -23,7 +23,7 @@ int main() {
 	double t, t2 = 0;
 	struct listnode *node;
 	struct listnode *hashtab[HASHTAB_SIZE];
-	char words[51203][60], w;
+	char words[51203][60], *w;
 	FILE *in = fopen("Dictionary.txt", "r");
 	for(n=0;n<51203;n++)
 	  {
@@ -37,11 +37,12 @@ int main() {
 	for(j=0;j<i;j++){
 		w = words[getrand(0,i-1)];
 		t = wtime();
+		hashtab_delete(hashtab, w);
 		node = hashtab_lookup(hashtab, w);
 		t = wtime() - t;
-		t2 = t2 + t;
+         	t2 = t2 + t;
 		}
-		t2 = t2/i;
+        	t2 = t2/i;
 		printf("n = %d; Elapsed time: %.6f sec.\n", i-1, t2);
 }
 }

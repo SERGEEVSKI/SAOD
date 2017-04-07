@@ -4,8 +4,8 @@
 #include <string.h>
 #include "hashtab.h"
 
-#define HASHTAB_SIZE 71
-#define HASHTAB_MUL  31
+#define HASHTAB_SIZE 100
+#define HASHTAB_MUL  10
 
 unsigned int hashtab_hash(char *key) {
 	unsigned int h = 0;
@@ -30,16 +30,18 @@ void hashtab_add(struct listnode **hashtab, char *key, int value) {
 	node->key = key;
 	node->value = value;
 	node->next = hashtab[index];
-	hashtab[index] = node;
+	hashtab[index] = node; }
 }
 
 struct listnode *hashtab_lookup(struct listnode **hashtab, char *key){
 	int index;
 	struct listnode *node;
 	index = hashtab_hash(key);
-	for(node = hashtab[index]; node != NULL; node = node->next){
+	node = hashtab[index];
+        while(node != NULL){
 	if(strcmp(node->key, key) == 0)
 		return node;
+	node = node->next;
 	}
 	return NULL;
 }
@@ -60,4 +62,4 @@ void hashtab_delete(struct listnode **hashtab, char *key) {
 		prev = p;
 	}
 }
-}
+
