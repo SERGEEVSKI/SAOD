@@ -1,8 +1,9 @@
-typedef struct {
-	char *key[100];
+struct bstree {
+	char *key;
 	int value;
-
-} bstree;
+	struct bstree *left;
+	struct bstree *right;
+};
 
 
 struct bstree *bstree_create(char *key, int value);
