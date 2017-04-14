@@ -4,7 +4,7 @@
 #include <string.h>
 #include "hashtab.h"
 
-#define HASHTAB_SIZE 100
+#define HASHTAB_SIZE 600000
 #define HASHTAB_MUL  10
 
 unsigned int hashtab_hash(char *key) {

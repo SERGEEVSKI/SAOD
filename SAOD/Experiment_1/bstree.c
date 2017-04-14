@@ -34,11 +34,11 @@ void bstree_add(struct bstree *tree, char *key, int value) {
 	   parent->right = node;
 }
 
-struct bstree *bstree_lookup(struct bstree *tree, char *key) {
+struct bstree *bstree_lookup(struct bstree *tree, int value) {
 	while(tree != NULL) {
-		if(key == tree->key) {
+		if(value == tree->value) {
 		  return tree; }
-		else if(key < tree->key) {
+		else if(value < tree->value) {
 		  tree = tree->left;
 		} else {
 		  tree = tree->right;

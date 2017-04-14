@@ -4,7 +4,7 @@
 #include <string.h>
 #include "hashtab.h"
 
-#define HASHTAB_SIZE 71
+#define HASHTAB_SIZE 600000
 #define HASHTAB_MUL  31
 
 double wtime() {
@@ -32,9 +32,9 @@ int main() {
 	  fclose(in);
 	hashtab_init(hashtab);
 	for(i=2;i<200000;i++){
-	hashtab_add(hashtab,words[i-1],i-1);
+	hashtab_add(hashtab,words[i%51203],i-1);
 	if(i%10000 == 0){
-	for(j=0;j<i;j++){
+	for(j=0;j<2;j++){
 		w = words[getrand(0,i-1)];
 		t = wtime();
 		hashtab_delete(hashtab, w);
@@ -43,7 +43,7 @@ int main() {
          	t2 = t2 + t;
 		}
         	t2 = t2/i;
-		printf("n = %d; Elapsed time: %.6f sec.\n", i-1, t2);
+		printf("n = %d; Elapsed time: %.15f sec.\n", i-1, t2);
 }
 }
 	return 0;
