@@ -36,18 +36,19 @@ int main() {
 	for(m=1;m<=20;m++){
 	i=10000;
 	for(b=0;b<i;b++){
-	hashtab_add(hashtab,words[51203],b-1);
+	hashtab_add(hashtab,words[b],b-1);
 	}
 	for(j=0;j<1000000;j++){
 		w = words[rand()%51203];
 		t = wtime();
-		hashtab_delete(hashtab, w);
+		//hashtab_delete(hashtab, w);
 		node = hashtab_lookup(hashtab, w);
 		t = wtime() - t;
          	t2 = t2 + t;
 		}
-        	t2 = t2/i;
-		printf("n = %d; Elapsed time: %.6f sec.\n", i*m, t2);
+        	t2 = t2/1000000;
+		printf("n = %d; Elapsed time: %.8f sec.\n", i*m, t2);
+	t2 = 0;
 }
 	return 0;
 }
