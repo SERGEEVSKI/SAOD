@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <time.h>
 #include <stdlib.h>
 #include <sys/time.h>
 #include <string.h>
 #include "hashtab.h"
 
-#define HASHTAB_SIZE 600000
+#define HASHTAB_SIZE 100000
 #define HASHTAB_MUL  31
 
 double wtime() {
@@ -19,7 +20,8 @@ int getrand(int min, int max)
 }
 
 int main() {
-	int n,i=0,j;
+	int n,i=0,j,m=0,b=0;
+	srand(time(NULL));
 	double t, t2 = 0;
 	struct listnode *node;
 	struct listnode *hashtab[HASHTAB_SIZE];
@@ -31,11 +33,13 @@ int main() {
 	  }
 	  fclose(in);
 	hashtab_init(hashtab);
-	for(i=2;i<200000;i++){
-	hashtab_add(hashtab,words[i%51203],i-1);
-	if(i%10000 == 0){
-	for(j=0;j<2;j++){
-		w = words[getrand(0,i-1)];
+	for(m=1;m<=20;m++){
+	i=10000;
+	for(b=0;b<i;b++){
+	hashtab_add(hashtab,words[51203],b-1);
+	}
+	for(j=0;j<1000000;j++){
+		w = words[rand()%51203];
 		t = wtime();
 		hashtab_delete(hashtab, w);
 		node = hashtab_lookup(hashtab, w);
@@ -43,8 +47,7 @@ int main() {
          	t2 = t2 + t;
 		}
         	t2 = t2/i;
-		printf("n = %d; Elapsed time: %.15f sec.\n", i-1, t2);
-}
+		printf("n = %d; Elapsed time: %.6f sec.\n", i*m, t2);
 }
 	return 0;
 }

@@ -4,7 +4,7 @@
 #include <string.h>
 #include "hashtab.h"
 
-#define HASHTAB_SIZE 600000
+#define HASHTAB_SIZE 100000
 #define HASHTAB_MUL  10
 
 unsigned int hashtab_hash(char *key) {
@@ -63,3 +63,5 @@ void hashtab_delete(struct listnode **hashtab, char *key) {
 	}
 }
 
+//void hashtab_free(struct listnode **hashtab){
+	
