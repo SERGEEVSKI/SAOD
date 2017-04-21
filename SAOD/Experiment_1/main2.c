@@ -5,8 +5,8 @@
 #include <string.h>
 #include "hashtab.h"
 
-#define HASHTAB_SIZE 100000
-#define HASHTAB_MUL  31
+#define HASHTAB_SIZE 10000
+#define HASHTAB_MUL  10
 
 double wtime() {
         struct timeval t;
@@ -33,22 +33,23 @@ int main() {
 	  }
 	  fclose(in);
 	hashtab_init(hashtab);
-	for(m=1;m<=20;m++){
-	i=10000;
-	for(b=0;b<i;b++){
-	hashtab_add(hashtab,words[b],b-1);
-	}
-	for(j=0;j<1000000;j++){
+	for(i = 1; i<=200000; i++)
+	{
+	hashtab_add(hashtab,words[i%51203],i);
+	if(i%10000 == 0)
+	{
+	for(j=0;j<10000000;j++){
 		w = words[rand()%51203];
 		t = wtime();
-		//hashtab_delete(hashtab, w);
 		node = hashtab_lookup(hashtab, w);
+		//hashtab_delete(hashtab, w);
 		t = wtime() - t;
          	t2 = t2 + t;
 		}
-        	t2 = t2/1000000;
-		printf("n = %d; Elapsed time: %.8f sec.\n", i*m, t2);
+        	t2 = t2/10000000;
+		printf("n = %d; Elapsed time: %.8f sec.\n", i, t2);
 	t2 = 0;
+	}
 }
 	return 0;
 }
